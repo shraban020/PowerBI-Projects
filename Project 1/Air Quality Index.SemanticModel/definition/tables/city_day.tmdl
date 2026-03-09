@@ -1,0 +1,181 @@
+table city_day
+	lineageTag: 8ceea97b-a4ac-4831-8795-864e266579e6
+
+	measure 'MAX Date' = "Last Refres Date: " & MAX(city_day[Date])
+		lineageTag: 8690f1aa-2c86-4576-bd6e-7015845e0d52
+
+	column City
+		dataType: string
+		lineageTag: 3cc53b85-c8d2-449d-a93c-974910799cfd
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 18b8e849-2133-4fb2-a170-5400fe74d65b
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: e0b3a3a5-cd9f-4b33-99c2-00b8c73b05b3
+			defaultHierarchy: LocalDateTable_2637e596-42cc-440e-9094-04f377f837c8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'PM2.5'
+		dataType: double
+		lineageTag: e94849f9-449d-4f18-8804-daa98b8f920f
+		summarizeBy: sum
+		sourceColumn: PM2.5
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PM10
+		dataType: string
+		lineageTag: a6b83ecd-9095-4ebd-badf-a1687d901e78
+		summarizeBy: none
+		sourceColumn: PM10
+
+		annotation SummarizationSetBy = Automatic
+
+	column NO
+		dataType: double
+		lineageTag: 0a83c0a2-1b33-494d-b3d4-4b6c572c8496
+		summarizeBy: sum
+		sourceColumn: NO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NO2
+		dataType: double
+		lineageTag: b0bf7e42-0fce-4c73-b6db-aac4ff88327f
+		summarizeBy: sum
+		sourceColumn: NO2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NOx
+		dataType: double
+		lineageTag: d965a665-5d79-407e-ad02-d6daae4e544c
+		summarizeBy: sum
+		sourceColumn: NOx
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NH3
+		dataType: string
+		lineageTag: f39653a1-fd8f-42e2-b3ea-d6de3bc90345
+		summarizeBy: none
+		sourceColumn: NH3
+
+		annotation SummarizationSetBy = Automatic
+
+	column CO
+		dataType: double
+		lineageTag: 5e17c348-fbee-460f-aad1-ed04df63c12b
+		summarizeBy: sum
+		sourceColumn: CO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SO2
+		dataType: double
+		lineageTag: a97609b2-5fd1-4439-b66e-224909bc574b
+		summarizeBy: sum
+		sourceColumn: SO2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column O3
+		dataType: double
+		lineageTag: 9ec3f37a-c9b7-4b39-8d06-c47ab0ae571a
+		summarizeBy: sum
+		sourceColumn: O3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Benzene
+		dataType: double
+		lineageTag: 737e41ee-41c6-482c-bf0c-6f81d954bf12
+		summarizeBy: sum
+		sourceColumn: Benzene
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Toluene
+		dataType: double
+		lineageTag: 5633e394-06c8-4dbd-89f4-2061be09fe6a
+		summarizeBy: sum
+		sourceColumn: Toluene
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Xylene
+		dataType: double
+		lineageTag: 965cf2c3-361c-48a4-a165-8dd2505a20ef
+		summarizeBy: sum
+		sourceColumn: Xylene
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AQI
+		dataType: int64
+		formatString: 0
+		lineageTag: c71ccd1a-175b-444f-8889-7ba246e362af
+		summarizeBy: sum
+		sourceColumn: AQI
+
+		annotation SummarizationSetBy = Automatic
+
+	column AQI_Bucket
+		dataType: string
+		lineageTag: b33e22e2-6d8d-4b49-8d2f-aafe77ab07da
+		summarizeBy: none
+		sourceColumn: AQI_Bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	partition city_day = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\shraban\Music\Power BI\city_day (1).csv"),[Delimiter=",", Columns=16, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}, {"Column7", type text}, {"Column8", type text}, {"Column9", type text}, {"Column10", type text}, {"Column11", type text}, {"Column12", type text}, {"Column13", type text}, {"Column14", type text}, {"Column15", type text}, {"Column16", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"City", type text}, {"Date", type date}, {"PM2.5", type number}, {"PM10", type text}, {"NO", type number}, {"NO2", type number}, {"NOx", type number}, {"NH3", type text}, {"CO", type number}, {"SO2", type number}, {"O3", type number}, {"Benzene", type number}, {"Toluene", type number}, {"Xylene", type number}, {"AQI", Int64.Type}, {"AQI_Bucket", type text}}),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Changed Type1", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null})))
+				in
+				    #"Removed Blank Rows"
+
+	changedProperty = Name
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

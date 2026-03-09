@@ -1,0 +1,516 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "4d4273cc32216a0787b4",
+  "position": {
+    "x": 840.56692913385825,
+    "y": 220.7244094488189,
+    "z": 8000,
+    "height": 481.76377952755905,
+    "width": 426.3307086614173,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "map",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "city_day"
+                    }
+                  },
+                  "Property": "City"
+                }
+              },
+              "queryRef": "city_day.City",
+              "nativeQueryRef": "City",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "city_day"
+                    }
+                  },
+                  "Property": "City"
+                }
+              },
+              "queryRef": "city_day.City",
+              "nativeQueryRef": "City"
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "city_day"
+                        }
+                      },
+                      "Property": "AQI"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(city_day.AQI)",
+              "nativeQueryRef": "Average of AQI"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "city_day"
+                        }
+                      },
+                      "Property": "Xylene"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(city_day.Xylene)",
+              "nativeQueryRef": "Average of Xylene"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "city_day"
+                        }
+                      },
+                      "Property": "Benzene"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(city_day.Benzene)",
+              "nativeQueryRef": "Average of Benzene"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "city_day"
+                        }
+                      },
+                      "Property": "CO"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(city_day.CO)",
+              "nativeQueryRef": "Average of CO"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "city_day"
+                        }
+                      },
+                      "Property": "NO"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(city_day.NO)",
+              "nativeQueryRef": "Average of NO"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "city_day"
+                        }
+                      },
+                      "Property": "NOx"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(city_day.NOx)",
+              "nativeQueryRef": "Average of NOx"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "city_day"
+                        }
+                      },
+                      "Property": "NO2"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(city_day.NO2)",
+              "nativeQueryRef": "Average of NO2"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "city_day"
+                        }
+                      },
+                      "Property": "O3"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(city_day.O3)",
+              "nativeQueryRef": "Average of O3"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "city_day"
+                        }
+                      },
+                      "Property": "PM2.5"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(city_day.PM2.5)",
+              "nativeQueryRef": "Average of PM2.5"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "city_day"
+                        }
+                      },
+                      "Property": "SO2"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(city_day.SO2)",
+              "nativeQueryRef": "Average of SO2"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "city_day"
+                        }
+                      },
+                      "Property": "Toluene"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(city_day.Toluene)",
+              "nativeQueryRef": "Average of Toluene"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Area wise AQI Overview'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "48430bc04a481be62090",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "city_day"
+              }
+            },
+            "Property": "City"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "d58d245402ab75c35d98",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "city_day"
+                  }
+                },
+                "Property": "AQI"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ec5cbd17e3b04227e18b",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "city_day"
+                  }
+                },
+                "Property": "Xylene"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e5771fd7765d0b080b43",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "city_day"
+                  }
+                },
+                "Property": "Benzene"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "18b5712976aaac12702c",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "city_day"
+                  }
+                },
+                "Property": "CO"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a06b08f0db68c9dd7a05",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "city_day"
+                  }
+                },
+                "Property": "NO"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a37f6e34b8806b620577",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "city_day"
+                  }
+                },
+                "Property": "NOx"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "eeb994fe9ea53b7b740a",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "city_day"
+                  }
+                },
+                "Property": "NO2"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8fd3f30a11577eb34644",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "city_day"
+                  }
+                },
+                "Property": "O3"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "3a017753e5101d621585",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "city_day"
+                  }
+                },
+                "Property": "PM2.5"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e09e42a4d0ddb07c9725",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "city_day"
+                  }
+                },
+                "Property": "SO2"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d2ffcf6b592a895c8466",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "city_day"
+                  }
+                },
+                "Property": "Toluene"
+              }
+            },
+            "Function": 1
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

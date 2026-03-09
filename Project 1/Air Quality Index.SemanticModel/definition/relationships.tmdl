@@ -1,0 +1,5 @@
+relationship e0b3a3a5-cd9f-4b33-99c2-00b8c73b05b3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: city_day.Date
+	toColumn: LocalDateTable_2637e596-42cc-440e-9094-04f377f837c8.Date
+
