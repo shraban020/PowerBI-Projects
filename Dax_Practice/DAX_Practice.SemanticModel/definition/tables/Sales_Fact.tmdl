@@ -1,0 +1,96 @@
+table Sales_Fact
+	lineageTag: b25503c2-a3a6-456f-83dc-8c498ff848f3
+
+	column OrderDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b126d3c1-a0af-4e23-b4bc-9a6f93b89122
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column StockDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d00a3135-a71a-43d2-9d4e-6e761fb77af5
+		summarizeBy: none
+		sourceColumn: StockDate
+
+		variation Variation
+			isDefault
+			relationship: af774357-6410-4fa0-9388-2f0c7849558f
+			defaultHierarchy: LocalDateTable_9bf7fe29-59ff-49fe-9f36-fe7a5b3e1db8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column OrderNumber
+		dataType: string
+		lineageTag: cf741006-3535-4e38-aab3-de3aea6ba636
+		summarizeBy: none
+		sourceColumn: OrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 6064b56b-ef84-4f96-9371-f5388c4de092
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: int64
+		formatString: 0
+		lineageTag: cec6a402-ec99-47ed-800c-8b08a9a4a664
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TerritoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: e8b7016d-f9bd-4710-9eda-e4aeb4d42047
+		summarizeBy: none
+		sourceColumn: TerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderLineItem
+		dataType: int64
+		formatString: 0
+		lineageTag: 1192754b-d5d2-40a8-ab53-0cd844a6f9d7
+		summarizeBy: sum
+		sourceColumn: OrderLineItem
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 12d676a3-6940-450a-81b1-c7e64342c258
+		summarizeBy: sum
+		sourceColumn: OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales_Fact = m
+		mode: import
+		queryGroup: Fact_Table
+		source =
+				let
+				    Source = Table.Combine({Sales_2022, Sales_2023, Sales_2024})
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

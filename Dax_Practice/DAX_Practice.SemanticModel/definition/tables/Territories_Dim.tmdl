@@ -1,0 +1,54 @@
+table Territories_Dim
+	lineageTag: 49eefc2b-73e1-4c37-9299-5ef970fcf23a
+
+	column SalesTerritoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 5dd07ed5-2360-44bf-a61b-c19a8f6994da
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: df3bf151-7e3a-4f3e-ab5c-8a7ed2264d5f
+		dataCategory: Continent
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 1b45209b-c7bb-4c64-8b62-e7fc09120f92
+		dataCategory: County
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: string
+		lineageTag: 0f28a6a9-71ce-4960-b67f-09744e7b82e5
+		dataCategory: Continent
+		summarizeBy: none
+		sourceColumn: Continent
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Territories_Dim = m
+		mode: import
+		queryGroup: Dim_Table
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\shraban\OneDrive\Music\Power BI\DAX_Capstone Proj 1\Dataset\Territories_Table.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"SalesTerritoryKey", Int64.Type}, {"Region", type text}, {"Country", type text}, {"Continent", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

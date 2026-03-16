@@ -1,0 +1,56 @@
+table Returns_Fact
+	lineageTag: 7ceb40ed-7666-4da4-bd62-1fffbe90b89b
+
+	column ReturnDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 52f163b0-b0d4-417a-92c4-dc8c635c44de
+		summarizeBy: none
+		sourceColumn: ReturnDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TerritoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ec50c0e-8f42-4d4b-a2ab-49b2b2afb64e
+		summarizeBy: none
+		sourceColumn: TerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e38a9fd-0cf4-4c39-bea1-a3255a816a56
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReturnQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 0fbe396f-d4be-4fc7-ba73-02f5e4fa2da8
+		summarizeBy: sum
+		sourceColumn: ReturnQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Returns_Fact = m
+		mode: import
+		queryGroup: Fact_Table
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\shraban\OneDrive\Music\Power BI\DAX_Capstone Proj 1\Dataset\Returns_Table....csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ReturnDate", type date}, {"TerritoryKey", Int64.Type}, {"ProductKey", Int64.Type}, {"ReturnQuantity", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

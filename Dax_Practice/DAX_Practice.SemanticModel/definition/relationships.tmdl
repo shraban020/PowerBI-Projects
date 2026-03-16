@@ -1,0 +1,71 @@
+relationship bd055edd-c4f4-495a-9838-257831c8d99a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Customers_Dim_Old.BirthDate
+	toColumn: LocalDateTable_1c9ebd8a-b6b3-40b1-8b53-ef786da9d178.Date
+
+relationship 915fd03c-8461-419b-b66b-fe9bc6cf1e61
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar_Dim.Date
+	toColumn: LocalDateTable_ce2c7ed0-58a0-4862-ada6-ba92f0b76a8e.Date
+
+relationship af774357-6410-4fa0-9388-2f0c7849558f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sales_Fact.StockDate
+	toColumn: LocalDateTable_9bf7fe29-59ff-49fe-9f36-fe7a5b3e1db8.Date
+
+relationship 720cfe76-82d9-d005-8057-f395e04da298
+	fromColumn: Sales_Fact.OrderDate
+	toColumn: Calendar_Dim.Date
+
+relationship 5c9fa4c3-8c22-3d82-2245-fc6d24e5267a
+	fromColumn: Product_Subcategories_Dim.ProductCategoryKey
+	toColumn: Product_Categories_Dim.ProductCategoryKey
+
+relationship cb359525-7087-cc2c-a342-007be5f6e1f7
+	fromColumn: Products_Dim.ProductSubcategoryKey
+	toColumn: Product_Subcategories_Dim.ProductSubcategoryKey
+
+relationship c58cd5fb-06df-39df-bf66-85ed6854489e
+	fromColumn: Returns_Fact.ProductKey
+	toColumn: Products_Dim.ProductKey
+
+relationship 07bd53dd-03ca-b981-d52c-e5b307fcdb89
+	fromColumn: Returns_Fact.ReturnDate
+	toColumn: Calendar_Dim.Date
+
+relationship ce34a79f-b308-5a9e-8ef9-72bfe26c895c
+	fromColumn: Returns_Fact.TerritoryKey
+	toColumn: Territories_Dim.SalesTerritoryKey
+
+relationship 8d686cad-b60b-493c-4ac7-f7041e1618fc
+	fromColumn: Sales_Fact.TerritoryKey
+	toColumn: Territories_Dim.SalesTerritoryKey
+
+relationship 8115227e-5458-1a1a-750d-e7821a7315d6
+	fromColumn: Sales_Fact.ProductKey
+	toColumn: Products_Dim.ProductKey
+
+relationship 89879610-e5d4-4389-9758-33d2672a6513
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar_Dim.'Start of month'
+	toColumn: LocalDateTable_e6016aef-75c2-4912-84c2-3fdd6df3d690.Date
+
+relationship fcd41620-db1f-48d0-8f92-21f584034578
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar_Dim.'Last 6 Month'
+	toColumn: LocalDateTable_d76e9cc5-14f0-45a7-9d71-511f294e6560.Date
+
+relationship 219bb36e-b0ed-41be-a910-28714f7013d3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar_Dim.'Start of yr'
+	toColumn: LocalDateTable_b91f6f90-a714-4ff9-bb66-fd7048306b31.Date
+
+relationship 184af08d-9f78-492d-a62a-d288f99b2880
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Customers_Dim.BirthDate
+	toColumn: LocalDateTable_7847bf27-30d7-4c1a-917f-2e2e44c6853d.Date
+
+relationship d05db44a-79fa-0cf6-3463-3da143115fa7
+	fromColumn: Sales_Fact.CustomerKey
+	toColumn: Customers_Dim.CustomerKey
+

@@ -1,0 +1,39 @@
+expression Sales_2022 =
+		let
+		    Source = Csv.Document(File.Contents("C:\Users\shraban\OneDrive\Music\Power BI\DAX_Capstone Proj 1\Dataset\Sales_2022.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OrderDate", type date}, {"StockDate", type date}, {"OrderNumber", type text}, {"ProductKey", Int64.Type}, {"CustomerKey", Int64.Type}, {"TerritoryKey", Int64.Type}, {"OrderLineItem", Int64.Type}, {"OrderQuantity", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: db058ba0-3c00-4f5f-8282-cb32a4969c85
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression Sales_2023 =
+		let
+		    Source = Csv.Document(File.Contents("C:\Users\shraban\OneDrive\Music\Power BI\DAX_Capstone Proj 1\Dataset\Sales_2023.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OrderDate", type date}, {"StockDate", type date}, {"OrderNumber", type text}, {"ProductKey", Int64.Type}, {"CustomerKey", Int64.Type}, {"TerritoryKey", Int64.Type}, {"OrderLineItem", Int64.Type}, {"OrderQuantity", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: 735d88d2-7816-431d-9d26-798fce67141c
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression Sales_2024 =
+		let
+		    Source = Csv.Document(File.Contents("C:\Users\shraban\OneDrive\Music\Power BI\DAX_Capstone Proj 1\Dataset\Sales_2024.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OrderDate", type date}, {"StockDate", type date}, {"OrderNumber", type text}, {"ProductKey", Int64.Type}, {"CustomerKey", Int64.Type}, {"TerritoryKey", Int64.Type}, {"OrderLineItem", Int64.Type}, {"OrderQuantity", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: f4c74336-4211-40c1-88ae-f0e07c07dc51
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

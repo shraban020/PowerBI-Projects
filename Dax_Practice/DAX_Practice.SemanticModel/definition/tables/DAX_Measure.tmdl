@@ -1,0 +1,73 @@
+table DAX_Measure
+	lineageTag: 4160c609-1e4c-475f-93e8-5881b96bc216
+
+	measure 'Total Revenue' = SUMX(Sales_Fact,Sales_Fact[OrderQuantity]*RELATED(Products_Dim[ProductPrice]))
+		lineageTag: 3cd49949-807a-4f04-a64d-53965b24be25
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Cost' = SUMX(Sales_Fact,Sales_Fact[OrderQuantity]*RELATED(Products_Dim[ProductCost]))
+		lineageTag: d4c5d20e-e2c5-4c6a-8bd1-ab0bb5401262
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Total_Profit = [Total Revenue]-[Total Cost]
+		lineageTag: 09ea21fa-73cb-473f-b0bb-c54877454e2c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 2022 = CALCULATE([Total_Profit],Calendar_Dim[Year] = "2022", Year(Calendar_Dim[Date]=2022))
+		lineageTag: 8bce7998-0ab3-47f2-89b8-1e41926cdf27
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 2023 = CALCULATE([Total_Profit],Calendar_Dim[Year] = "2023", Year(Calendar_Dim[Date]=2023))
+		lineageTag: 16356954-2738-45c5-b530-2385781f9334
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 2024 = CALCULATE([Total_Profit],Calendar_Dim[Year] = "2024", Year(Calendar_Dim[Date]=2024))
+		lineageTag: 1fe0fbe4-7fc4-4f41-adff-0d739a02b363
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Previous Month Revenue' =
+			
+			CALCULATE([Total Revenue], DATEADD(Calendar_Dim[Date],-1,MONTH))
+		lineageTag: cbf3b85d-8c65-46d4-bef3-9607abbb58ec
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Order No' = DISTINCTCOUNT(Sales_Fact[OrderNumber])
+		formatString: 0
+		lineageTag: 1ef5df7f-2543-4a94-bd4c-4c20a2ae11e8
+
+	measure 'Previous Month Order' = CALCULATE(SUM(Sales_Fact[OrderQuantity]),DATEADD(Calendar_Dim[Date],-1,MONTH))
+		formatString: 0
+		lineageTag: b81e15b6-7049-4d56-96a3-aa6684008c53
+
+	measure 'Total return no' = COUNT(Returns_Fact[ReturnQuantity])
+		formatString: 0
+		lineageTag: 137683f6-f1db-4996-a589-b82c62fcbc50
+
+	measure 'Prev Mnth return' = CALCULATE(SUM(Returns_Fact[ReturnQuantity]), DATEADD(Calendar_Dim[Date],-1,MONTH))
+		formatString: 0
+		lineageTag: 4043489c-db35-412a-b434-be75df99f8ac
+
+	measure 'target Return' = [Total return no]*0.90
+		lineageTag: 1241131f-7cae-4781-b411-1c8ba069518c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition DAX_Measure = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

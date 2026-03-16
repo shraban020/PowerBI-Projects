@@ -1,0 +1,158 @@
+table Customers_Dim
+	lineageTag: b3054fee-c581-4be5-bd0b-63a7306494f8
+
+	column CustomerKey
+		formatString: 0
+		lineageTag: c5f87ee1-8c0a-4b0e-90b6-484fc58ebd47
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[CustomerKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prefix
+		lineageTag: c4f2323c-a6b3-4b8a-876f-31e465bcb48b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[Prefix]
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstName
+		lineageTag: 88c3497c-a90e-4fbf-8999-08cfa4735879
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[FirstName]
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastName
+		lineageTag: 3a9622ed-b778-4b3d-a93b-e6340bce9b9e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[LastName]
+
+		annotation SummarizationSetBy = Automatic
+
+	column BirthDate
+		formatString: General Date
+		lineageTag: d2af6873-81bb-44a9-8997-2556f246d104
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[BirthDate]
+
+		variation Variation
+			isDefault
+			relationship: 184af08d-9f78-492d-a62a-d288f99b2880
+			defaultHierarchy: LocalDateTable_7847bf27-30d7-4c1a-917f-2e2e44c6853d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaritalStatus
+		lineageTag: 6a90493d-680f-4bc7-ac1f-8b8b02f16054
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[MaritalStatus]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		lineageTag: ffa26817-54b8-4482-af90-229f471c71c1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[Gender]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmailAddress
+		lineageTag: 302ed0ca-2e6e-4ee1-a2cb-bdd306978467
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[EmailAddress]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnnualIncome
+		formatString: 0
+		lineageTag: 4da6ac22-9321-4022-921b-5d7860414313
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[AnnualIncome]
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalChildren
+		formatString: 0
+		lineageTag: 91006de1-1b57-42d0-a791-3b72bfb667f3
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[TotalChildren]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EducationLevel
+		lineageTag: 1906b9f4-ebb4-4e04-80a2-a6c0ea2c17c9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[EducationLevel]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Occupation
+		lineageTag: e8ff0ddd-42fb-46c7-bf8b-8b586b0af0c9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[Occupation]
+
+		annotation SummarizationSetBy = Automatic
+
+	column HomeOwner
+		lineageTag: 617e4d4a-8179-49d9-b1da-c60ddb78f1e2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[HomeOwner]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		formatString: 0
+		lineageTag: 8bd367db-cb5d-458c-99b9-4d5cb7b91615
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[Age]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Age Group'
+		lineageTag: 87ac41ba-851d-4f88-a889-50491fd6ed9f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Customers_Dim_Old[Age Group]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Full_Name = Customers_Dim[Prefix] &" "& Customers_Dim[FirstName] &" "& Customers_Dim[LastName]
+		lineageTag: cfca5a11-61ee-462a-9579-71f883ce0484
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Income Range' =
+			
+			SWITCH(
+			    TRUE(),
+			    Customers_Dim[AnnualIncome] <= 50000,"Low Income",
+			    Customers_Dim[AnnualIncome] <= 100000,"Average Income",
+			    Customers_Dim[AnnualIncome] <= 1500000,"High Income",
+			    Customers_Dim[AnnualIncome] >  1500000, "Very High")
+		lineageTag: 4fbce6ee-928c-4da3-b007-278ff8898b39
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Customers_Dim = calculated
+		mode: import
+		source = CALCULATETABLE(Customers_Dim_Old,Customers_Dim_Old[Age]>18)
+
+	annotation PBI_Id = 4369fcbe4234488ca4d4ac925d67613e
+

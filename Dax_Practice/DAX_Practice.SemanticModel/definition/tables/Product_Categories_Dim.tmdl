@@ -1,0 +1,35 @@
+table Product_Categories_Dim
+	lineageTag: 76b213d9-9346-41df-901a-5671df72e8fc
+
+	column ProductCategoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: cb44d1f9-66b0-4d1b-8657-a82b877ffe4d
+		summarizeBy: none
+		sourceColumn: ProductCategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CategoryName
+		dataType: string
+		lineageTag: 17b20c10-158d-4e4a-902f-5abeed38e20f
+		summarizeBy: none
+		sourceColumn: CategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product_Categories_Dim = m
+		mode: import
+		queryGroup: Dim_Table
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\shraban\OneDrive\Music\Power BI\DAX_Capstone Proj 1\Dataset\Product_Categories_Table.csv"),[Delimiter=",", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ProductCategoryKey", Int64.Type}, {"CategoryName", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

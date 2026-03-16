@@ -1,0 +1,113 @@
+table Calendar_Dim
+	lineageTag: d20ae916-02da-4769-bac0-048acb603999
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 96e9eb7e-7c76-482a-aac7-f6f30fd206cb
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 915fd03c-8461-419b-b66b-fe9bc6cf1e61
+			defaultHierarchy: LocalDateTable_ce2c7ed0-58a0-4862-ada6-ba92f0b76a8e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Month = FORMAT(Calendar_Dim[Date],"mmm")
+		lineageTag: 329cd078-0a2d-42d4-8edf-a06e594f6122
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start of month' = STARTOFMONTH(Calendar_Dim[Date])
+		formatString: Short Date
+		lineageTag: f048c0ca-032e-409e-aa83-fc4e1e68f786
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 89879610-e5d4-4389-9758-33d2672a6513
+			defaultHierarchy: LocalDateTable_e6016aef-75c2-4912-84c2-3fdd6df3d690.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fiscal_year = Month(EDATE(Calendar_Dim[Date],-3))
+		formatString: 0
+		lineageTag: a8473aa3-e09a-4fcb-9ff1-b71bb9c5981b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month_Yr = Format(Calendar_Dim[Date],"MMM-yyyy")
+		lineageTag: 711b80de-8b84-410a-965d-f3b78741ef5f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Yearly_Qarter = QUARTER(EDATE(Calendar_Dim[Date],-3))
+		formatString: 0
+		lineageTag: eac251e2-5e4b-4e4a-81d3-52c2369abbac
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last 6 Month' = EDATE(Calendar_Dim[Date],-6)
+		formatString: Short Date
+		lineageTag: da84a521-1fdf-459c-98c3-149d3183efd7
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: fcd41620-db1f-48d0-8f92-21f584034578
+			defaultHierarchy: LocalDateTable_d76e9cc5-14f0-45a7-9d71-511f294e6560.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Q' =
+			
+			SWITCH (
+			     Calendar_Dim[Yearly_Qarter],
+			     1,"Q1",2,"Q2",3,"Q3",4,"Q4")
+		lineageTag: 7b14df26-ae63-4fa4-b1e6-ff3eff65e019
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start of yr' = STARTOFYEAR(Calendar_Dim[Date])
+		formatString: Short Date
+		lineageTag: 2e408522-e7cd-491c-84ae-8975e69f422e
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 219bb36e-b0ed-41be-a910-28714f7013d3
+			defaultHierarchy: LocalDateTable_b91f6f90-a714-4ff9-bb66-fd7048306b31.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year = FORMAT(Calendar_Dim[Date],"yyyy")
+		lineageTag: 89053ff1-b4bd-4917-9a08-83e5c8f0eb57
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendar_Dim = m
+		mode: import
+		queryGroup: Dim_Table
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\shraban\OneDrive\Music\Power BI\DAX_Capstone Proj 1\Dataset\Calendar_Table.csv"),[Delimiter=",", Columns=1, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Changed Type")
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

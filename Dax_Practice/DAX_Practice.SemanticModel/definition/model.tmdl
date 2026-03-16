@@ -1,0 +1,43 @@
+model Model
+	culture: en-IN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Fact_Table
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Dim_Table
+
+	annotation PBI_QueryGroupOrder = 2
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Calendar_Dim","Customers_Dim_Old","Product_Categories_Dim","Product_Subcategories_Dim","Products_Dim","Returns_Fact","Sales_2022","Sales_2023","Sales_2024","Territories_Dim","Sales_Fact","DAX_Measure"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_ed0baf2b-e7a1-4b73-abb9-850224d0bff5
+ref table Territories_Dim
+ref table Product_Categories_Dim
+ref table Returns_Fact
+ref table Customers_Dim_Old
+ref table LocalDateTable_1c9ebd8a-b6b3-40b1-8b53-ef786da9d178
+ref table Products_Dim
+ref table Calendar_Dim
+ref table LocalDateTable_ce2c7ed0-58a0-4862-ada6-ba92f0b76a8e
+ref table Product_Subcategories_Dim
+ref table Sales_Fact
+ref table LocalDateTable_9bf7fe29-59ff-49fe-9f36-fe7a5b3e1db8
+ref table LocalDateTable_e6016aef-75c2-4912-84c2-3fdd6df3d690
+ref table LocalDateTable_d76e9cc5-14f0-45a7-9d71-511f294e6560
+ref table LocalDateTable_b91f6f90-a714-4ff9-bb66-fd7048306b31
+ref table Customers_Dim
+ref table LocalDateTable_7847bf27-30d7-4c1a-917f-2e2e44c6853d
+ref table DAX_Measure
+
+ref cultureInfo en-IN
+
