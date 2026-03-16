@@ -1,2 +1,2 @@
 # PowerBI-Projects
-I have loaded my mini projects
+I have loaded my prctice set
