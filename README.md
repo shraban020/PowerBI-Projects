@@ -1,2 +1,2 @@
 # PowerBI-Projects
-I have loaded my prctice set
+I have loaded my practice set
