@@ -1,0 +1,101 @@
+table Calendar
+	lineageTag: fcf5a3b1-e1b1-4301-b658-2a02c63ae6e9
+
+	column Date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: e8bc3623-6468-4119-af71-cc71ff362425
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 1a301b87-0566-4748-8c36-2c90d3e22804
+			defaultHierarchy: LocalDateTable_520ba73b-728c-49e0-bda4-1eaef2ee099c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Month = FORMAT('Calendar'[Date], "mmm")
+		lineageTag: 94d97e5a-86b3-4b47-b78f-a140813430f8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year = FORMAT('Calendar'[Date], "yyyy")
+		lineageTag: 11a28a10-87d6-4b83-90a3-2019c5544fce
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fiscal_Yr = MONTH(EDATE('Calendar'[Date],-3))
+		formatString: 0
+		lineageTag: 612707a7-900d-4f18-9403-e1127e8ee6d4
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month_Year = FORMAT('Calendar'[Date],"MMM-YYYY")
+		lineageTag: dc59558e-874c-4b2e-a222-9fe6b7d935f1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start Of Month' = STARTOFMONTH('Calendar'[Date])
+		formatString: Short Date
+		lineageTag: 612c18d5-140e-48bd-a6a5-f698d62c3526
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 5e896dd7-1f0e-4cb2-8201-d527bd60ffe1
+			defaultHierarchy: LocalDateTable_e84ba696-b38b-4b74-be41-7a2622117ee4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Yearly-Quarter = QUARTER(EDATE('Calendar'[Date],-3))
+		formatString: 0
+		lineageTag: 2819a708-06a0-47ff-b6c7-af0008939e88
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter_Q =
+			
+			SWITCH
+			(
+			'Calendar'[Yearly-Quarter],1,"Q1",2,"Q2",3,"Q3",4,"Q4"
+			)
+		lineageTag: 88de6397-fb6d-4620-b662-ac7f410c5ac2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start Of Year' = STARTOFYEAR('Calendar'[Date].[Date])
+		formatString: Short Date
+		lineageTag: c29a2908-5143-4541-b8d8-a2803ffe0599
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 4749cb27-958c-4eae-8a41-892cbe9b537b
+			defaultHierarchy: LocalDateTable_7790cf94-5468-4908-bc80-33e3f6e589b4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendar = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\shraban\OneDrive\Music\Power BI\DAX_Capstone Proj 2\Dataset\Calendar.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}})
+				in
+				    #"Changed Type"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

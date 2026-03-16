@@ -1,0 +1,25 @@
+model Model
+	culture: en-IN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Bank_Details","Calendar","Customer_Details","DAX_Measure"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Bank_Details
+ref table DateTableTemplate_bcfa66ee-f9d1-4b56-a61d-d67a0a6aa6c6
+ref table Calendar
+ref table LocalDateTable_520ba73b-728c-49e0-bda4-1eaef2ee099c
+ref table Customer_Details
+ref table LocalDateTable_e84ba696-b38b-4b74-be41-7a2622117ee4
+ref table LocalDateTable_7790cf94-5468-4908-bc80-33e3f6e589b4
+ref table DAX_Measure
+
+ref cultureInfo en-IN
+

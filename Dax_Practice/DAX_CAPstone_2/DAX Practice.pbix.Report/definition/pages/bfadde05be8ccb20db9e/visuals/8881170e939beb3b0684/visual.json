@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "8881170e939beb3b0684",
+  "position": {
+    "x": 442.50265111346766,
+    "y": 210.39236479321315,
+    "z": 1000,
+    "height": 149.31071049840935,
+    "width": 259.25768822905621
+  },
+  "visual": {
+    "visualType": "card",
+    "autoSelectVisualType": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DAX_Measure"
+                    }
+                  },
+                  "Property": "Average Monthly Debt"
+                }
+              },
+              "queryRef": "DAX_Measure.Average Monthly Debt",
+              "nativeQueryRef": "Average Monthly Debt"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

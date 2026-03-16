@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "ee4d6ce5c54738362e67",
+  "position": {
+    "x": 980,
+    "y": 420,
+    "z": 2000,
+    "height": 300,
+    "width": 300
+  },
+  "visual": {
+    "visualType": "card",
+    "autoSelectVisualType": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DAX_Measure"
+                    }
+                  },
+                  "Property": "Total Current Credit Balance"
+                }
+              },
+              "queryRef": "DAX_Measure.Total Current Credit Balance",
+              "nativeQueryRef": "Total Current Credit Balance"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

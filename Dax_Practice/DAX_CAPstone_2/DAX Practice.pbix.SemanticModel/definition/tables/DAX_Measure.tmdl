@@ -1,0 +1,50 @@
+table DAX_Measure
+	lineageTag: 2be45cea-7792-43d8-92b0-6373e4ea2a29
+
+	measure 'Average Monthly Debt' = AVERAGE(Bank_Details[Monthly Debt])
+		lineageTag: ae64c2f3-0ce4-4eb3-943d-6ff0254908c7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Current Credit Balance' = SUM(Bank_Details[Current Credit Balance])
+		formatString: 0
+		lineageTag: 61c4f039-0123-4e46-afb7-f2df7ba5af59
+
+	measure 'Average Annual Income' = AVERAGE(Customer_Details[Annual Income])
+		lineageTag: 8d24de25-0cf1-4b87-8ffb-abfb3f59984e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Customer' = DISTINCTCOUNT(Customer_Details[Customer ID])
+		formatString: 0
+		lineageTag: 1bf3365b-7a19-4311-a014-f8e8066fb9d3
+
+	measure 'Male Customer' = CALCULATE([Total Customer],Customer_Details[Gender] = "Male")
+		formatString: 0
+		lineageTag: 4bda10ed-dc31-40d7-90e9-eadd9d89a4d7
+
+	measure 'Female Customer' = CALCULATE([Total Customer],Customer_Details[Gender] = "Female")
+		formatString: 0
+		lineageTag: ae1a0ab7-fccd-482b-9b01-4d309534b5e9
+
+	measure 'Average Age' = AVERAGE(Customer_Details[Age])
+		lineageTag: a4b2e52c-3f15-42ed-b55a-16b56bc45c1b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Loan Consumers' = DISTINCTCOUNT(Bank_Details[Loan ID])
+		formatString: 0
+		lineageTag: d7456244-ed86-4cbd-a6c3-dca261ab345c
+
+	partition DAX_Measure = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

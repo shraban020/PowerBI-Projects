@@ -1,0 +1,158 @@
+table Bank_Details
+	lineageTag: acf846d5-a885-4ce9-a9e4-06d31f8d2daf
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: b955be39-04db-4a39-805e-0f4a30584149
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Loan ID'
+		dataType: string
+		lineageTag: 195ea84d-9a4e-472b-882f-2efdcc39eb05
+		summarizeBy: none
+		sourceColumn: Loan ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Joined'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 2aa75ca5-94db-4432-abc1-c9a2a5a24f8f
+		summarizeBy: none
+		sourceColumn: Date Joined
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Houseloan
+		dataType: string
+		lineageTag: ef786527-5722-496b-8e2b-c80c01a59a30
+		summarizeBy: none
+		sourceColumn: Houseloan
+
+		annotation SummarizationSetBy = Automatic
+
+	column Otherloan
+		dataType: string
+		lineageTag: fb883ba5-3b80-43ee-837f-3b9a444472ab
+		summarizeBy: none
+		sourceColumn: Otherloan
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Loan Status'
+		dataType: string
+		lineageTag: 4b842a1c-4631-473b-bc3b-0cc4ecc7d800
+		summarizeBy: none
+		sourceColumn: Loan Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Current Loan Amount'
+		dataType: int64
+		formatString: 0
+		lineageTag: 66b231ef-2def-4d5b-b808-178fea7fcf93
+		summarizeBy: sum
+		sourceColumn: Current Loan Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column Term
+		dataType: string
+		lineageTag: 2d78fcf3-7581-47c7-b430-f83657076990
+		summarizeBy: none
+		sourceColumn: Term
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Home Ownership'
+		dataType: string
+		lineageTag: f473e5d4-a7be-41ba-a650-379c22cd25e3
+		summarizeBy: none
+		sourceColumn: Home Ownership
+
+		annotation SummarizationSetBy = Automatic
+
+	column Purpose
+		dataType: string
+		lineageTag: e663a01d-88d0-4082-98d0-377101d64881
+		summarizeBy: none
+		sourceColumn: Purpose
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Monthly Debt'
+		dataType: double
+		lineageTag: 4df84870-a1a9-4c16-bfc3-ee12a621f28f
+		summarizeBy: sum
+		sourceColumn: Monthly Debt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Years of Credit History'
+		dataType: double
+		lineageTag: c08e6d05-4e2b-45bf-8a24-ae9a86729db2
+		summarizeBy: sum
+		sourceColumn: Years of Credit History
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Number of Open Accounts'
+		dataType: int64
+		formatString: 0
+		lineageTag: 28d58741-e940-4b61-b956-59805dd9e6fc
+		summarizeBy: sum
+		sourceColumn: Number of Open Accounts
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Number of Credit Problems'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6abe9e4a-0da8-4d7b-aaae-d67c28c5a1a2
+		summarizeBy: sum
+		sourceColumn: Number of Credit Problems
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Current Credit Balance'
+		dataType: int64
+		formatString: 0
+		lineageTag: fdbb858e-df11-4697-83be-6b334f36993d
+		summarizeBy: sum
+		sourceColumn: Current Credit Balance
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Maximum Open Credit'
+		dataType: int64
+		formatString: 0
+		lineageTag: b86769c2-72ef-4827-bf3d-5b5d96254883
+		summarizeBy: sum
+		sourceColumn: Maximum Open Credit
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Bank_Details = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\shraban\OneDrive\Music\Power BI\DAX_Capstone Proj 2\Dataset\Bank.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Customer ID", type text}, {"Loan ID", type text}, {"Date Joined", type date}, {"Houseloan", type text}, {"Otherloan", type text}, {"Loan Status", type text}, {"Current Loan Amount", Int64.Type}, {"Term", type text}, {"Home Ownership", type text}, {"Purpose", type text}, {"Monthly Debt", type number}, {"Years of Credit History", type number}, {"Number of Open Accounts", Int64.Type}, {"Number of Credit Problems", Int64.Type}, {"Current Credit Balance", Int64.Type}, {"Maximum Open Credit", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

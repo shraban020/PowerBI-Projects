@@ -1,0 +1,27 @@
+relationship 1a301b87-0566-4748-8c36-2c90d3e22804
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.Date
+	toColumn: LocalDateTable_520ba73b-728c-49e0-bda4-1eaef2ee099c.Date
+
+relationship AutoDetected_28051b7c-4ae2-4d89-bad1-bfa543429f71
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Customer_Details.'Customer ID'
+	toColumn: Bank_Details.'Customer ID'
+
+relationship 782d2b00-d780-2f15-88b7-2f15d0612de6
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Bank_Details.'Date Joined'
+	toColumn: Calendar.Date
+
+relationship 5e896dd7-1f0e-4cb2-8201-d527bd60ffe1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.'Start Of Month'
+	toColumn: LocalDateTable_e84ba696-b38b-4b74-be41-7a2622117ee4.Date
+
+relationship 4749cb27-958c-4eae-8a41-892cbe9b537b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.'Start Of Year'
+	toColumn: LocalDateTable_7790cf94-5468-4908-bc80-33e3f6e589b4.Date
+

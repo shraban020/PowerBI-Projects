@@ -1,0 +1,100 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "59ca09e67cea08ac003d",
+  "position": {
+    "x": 10,
+    "y": 0,
+    "z": 0,
+    "height": 220,
+    "width": 280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Customer_Details"
+                    }
+                  },
+                  "Property": "Age"
+                }
+              },
+              "queryRef": "Customer_Details.Age",
+              "nativeQueryRef": "Age",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Customer_Details"
+                        }
+                      },
+                      "Property": "Annual Income"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Customer_Details.Annual Income)",
+              "nativeQueryRef": "Sum of Annual Income"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Customer_Details"
+                      }
+                    },
+                    "Property": "Annual Income"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Income Vs Age Analysis'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
